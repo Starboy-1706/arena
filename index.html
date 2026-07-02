@@ -1,0 +1,2253 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Parroquia Santa Bárbara del Zulia - Horarios, noticias, historia, apostolados y contacto.">
+    <title>Parroquia Santa Bárbara</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --sacro: #002244;
+            --oro: #d4af37;
+            --crema: #f0ece4;
+            --tinta: #151515;
+            --linea: rgba(0,34,68,0.10);
+            --glass-bg: rgba(255,255,255,0.45);
+            --glass-border: rgba(255,255,255,0.55);
+            --glass-shadow: rgba(0,0,0,0.06);
+            --glass-blur: 18px;
+            --reflex: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.1) 40%, transparent 60%);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Poppins', system-ui, sans-serif;
+            background: var(--crema);
+            color: var(--tinta);
+            overflow-x: hidden;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            --crema: #080c14;
+            --tinta: #f0ece4;
+            --linea: rgba(212,175,55,0.12);
+            --glass-bg: rgba(15,20,35,0.55);
+            --glass-border: rgba(212,175,55,0.18);
+            --glass-shadow: rgba(0,0,0,0.25);
+            --reflex: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 40%, transparent 60%);
+        }
+
+        .cinzel { font-family: 'Cinzel', Georgia, serif; letter-spacing: 0.05em; }
+
+        /* ===== LIQUID GLASS ===== */
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(1.6);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.6);
+            border: 1px solid var(--glass-border);
+            box-shadow:
+                0 8px 32px var(--glass-shadow),
+                inset 0 1px 0 rgba(255,255,255,0.45),
+                inset 0 -1px 0 rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--reflex);
+            pointer-events: none;
+            border-radius: inherit;
+            z-index: 0;
+        }
+
+        .liquid-glass > * { position: relative; z-index: 1; }
+        .liquid-glass { transition: box-shadow 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease; }
+
+        .liquid-glass-strong {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(26px) saturate(1.8);
+            -webkit-backdrop-filter: blur(26px) saturate(1.8);
+            border: 1.5px solid rgba(255,255,255,0.7);
+            box-shadow:
+                0 12px 40px rgba(0,0,0,0.08),
+                inset 0 2px 0 rgba(255,255,255,0.6),
+                inset 0 -2px 0 rgba(255,255,255,0.1);
+        }
+
+        body.dark-mode .liquid-glass-strong {
+            background: rgba(10,15,30,0.65);
+            border-color: rgba(212,175,55,0.2);
+        }
+
+        /* ===== BACKGROUND BLOBS ===== */
+        .bg-blobs {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: blobFloat 18s ease-in-out infinite alternate;
+        }
+
+        .blob-1 { width: 500px; height: 500px; background: #d4af37; top: -10%; left: -10%; animation-duration: 22s; }
+        .blob-2 { width: 400px; height: 400px; background: #002244; bottom: -5%; right: -8%; animation-duration: 20s; animation-delay: 3s; }
+        .blob-3 { width: 350px; height: 350px; background: #8b5cf6; top: 40%; left: 50%; animation-duration: 25s; animation-delay: 6s; opacity: 0.2; }
+
+        body.dark-mode .blob { opacity: 0.25; }
+
+        @keyframes blobFloat {
+            0% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(40px,-30px) scale(1.06); }
+            66% { transform: translate(-20px,50px) scale(0.95); }
+            100% { transform: translate(30px,20px) scale(1.03); }
+        }
+
+        /* ===== HERO ===== */
+        .hero-wrap {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            position: absolute;
+            inset: 0;
+            background: url('img/portada.jpg') center/cover no-repeat;
+            transform: scale(1.05);
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(0,20,45,0.82) 0%, rgba(0,34,68,0.55) 50%, rgba(0,10,25,0.92) 100%);
+        }
+
+        @keyframes heroZoom {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.12); }
+        }
+
+        /* ===== NAV ===== */
+        .nav-pill { transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
+        .nav-pill:hover, .nav-pill[aria-current="page"] {
+            background: rgba(212,175,55,0.25);
+            color: #d4af37;
+            box-shadow: 0 0 20px rgba(212,175,55,0.15);
+        }
+        .nav-pill:active { transform: scale(0.94); transition-duration: 0.1s; }
+
+        /* ===== SECCIONES ===== */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(18px);
+        }
+        .page.active {
+            display: block;
+            animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px) scale(0.995); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== CARD HOVER & TAP ===== */
+        .card-glass {
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
+            cursor: pointer;
+            will-change: transform;
+        }
+        .card-glass:hover {
+            transform: translateY(-5px) scale(1.012);
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+        .card-glass:active {
+            transform: scale(0.97);
+            transition-duration: 0.12s;
+        }
+
+        /* ===== DETAIL VIEW (replaces modal) ===== */
+        .modal-bg {
+            background: var(--crema);
+            z-index: 999;
+        }
+        #modal {
+            backdrop-filter: none;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.4s cubic-bezier(0.16,1,0.3,1);
+            pointer-events: none;
+            display: block !important;
+            visibility: hidden;
+        }
+        #modal.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            visibility: visible;
+        }
+        #modal > div {
+            max-width: 100%;
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
+            border-radius: 0;
+            background: var(--crema);
+            border: none;
+            box-shadow: none;
+        }
+        #modal .detail-inner {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        #modal .detail-inner > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        #modal.open .detail-inner > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #modal.open .detail-inner > *:nth-child(1) { transition-delay: 0.1s; }
+        #modal.open .detail-inner > *:nth-child(2) { transition-delay: 0.18s; }
+        #modal.open .detail-inner > *:nth-child(3) { transition-delay: 0.25s; }
+        #modal.open .detail-inner > *:nth-child(4) { transition-delay: 0.32s; }
+        #modal.open .detail-inner > *:nth-child(5) { transition-delay: 0.38s; }
+
+        /* ===== DETAIL VIEW ===== */
+
+        /* Article text */
+        .detail-body p {
+            margin-bottom: 1.25rem;
+            line-height: 1.9;
+        }
+        .detail-body::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* Images in article */
+        .d-img {
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+        }
+        .d-img img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            max-height: 400px;
+            cursor: zoom-in;
+            transition: transform 0.4s ease;
+        }
+        .d-img:hover img { transform: scale(1.015); }
+
+        /* Float variant */
+        .d-img-float {
+            float: right;
+            width: 44%;
+            margin: 0.25rem 0 1rem 1.25rem;
+        }
+        @media (max-width: 640px) {
+            .d-img-float {
+                float: none;
+                width: 100%;
+                margin: 0 0 1rem 0;
+            }
+        }
+
+        /* Grid for 2+ images */
+        .d-img-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+        }
+        .d-img-pair img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in;
+            transition: transform 0.4s ease;
+        }
+        .d-img-pair img:hover { transform: scale(1.03); }
+        @media (max-width: 640px) {
+            .d-img-pair { grid-template-columns: 1fr; }
+            .d-img-pair img { height: 180px; }
+        }
+
+        /* Coordinator cards */
+        .coord-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            border-radius: 16px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 16px var(--glass-shadow);
+            color: var(--tinta);
+            text-align: left;
+            width: 100%;
+        }
+        .coord-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--oro);
+            flex-shrink: 0;
+        }
+        .coord-placeholder {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--oro), #b8941f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+            backdrop-filter: blur(16px);
+        }
+        #lightbox.active { display: flex; }
+        #lightbox img {
+            max-width: 94vw;
+            max-height: 92vh;
+            object-fit: contain;
+            border-radius: 6px;
+            animation: lbIn 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        @keyframes lbIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Sacramento detail */
+        #modal .prose-content .liquid-glass {
+            background: rgba(255,255,255,0.35);
+        }
+        body.dark-mode #modal .prose-content .liquid-glass {
+            background: rgba(255,255,255,0.05);
+        }
+        #modal .prose-content ul { list-style: none; padding: 0; margin: 0; }
+        #modal .prose-content h4 { margin: 0; }
+
+        /* Admin Panel */
+        .adm-field {
+            margin-bottom: 14px;
+        }
+        .adm-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.6;
+            margin-bottom: 5px;
+            color: var(--tinta);
+        }
+        .adm-input {
+            width: 100%;
+            background: var(--glass-bg);
+            border: 1px solid var(--linea);
+            border-radius: 10px;
+            padding: 10px 12px;
+            color: var(--tinta);
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .adm-input:focus { border-color: var(--oro); }
+        textarea.adm-input { min-height: 70px; resize: vertical; }
+        .adm-tab {
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--linea);
+            background: transparent;
+            color: var(--tinta);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .adm-tab.active {
+            background: var(--oro);
+            color: var(--sacro);
+            border-color: var(--oro);
+        }
+        .adm-colors {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .adm-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 2px solid var(--linea);
+            cursor: pointer;
+            padding: 0;
+        }
+        .adm-del {
+            background: transparent;
+            border: 1px solid #d03040;
+            color: #d03040;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 20px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .adm-del:hover { background: #d03040; color: white; }
+        body.dark-mode .adm-input { background: #081420; color: #f0ece4; }
+        body.dark-mode #adminLogin > div { background: #0a1524; }
+        body.dark-mode #adminPwd { background: #081420; color: #f0ece4; }
+
+        /* Dark mode detail */
+        body.dark-mode #modal > div { background: var(--crema); }
+        body.dark-mode #modal .liquid-glass { border-color: rgba(212,175,55,0.12); }
+
+        /* ===== GALLERY MASONRY ===== */
+        .masonry { columns: 1; column-gap: 16px; }
+        .masonry > * { break-inside: avoid; margin-bottom: 16px; }
+        @media (min-width: 640px) { .masonry { columns: 2; } }
+        @media (min-width: 1024px) { .masonry { columns: 3; } }
+
+        /* ===== FILA DE PROGRAMACIÓN DE HOY ===== */
+        .today-row {
+            background: linear-gradient(90deg, rgba(212,175,55,0.12), transparent);
+            border-left: 4px solid var(--oro);
+        }
+
+        /* ===== FOCUS ===== */
+        .focus-ring:focus-visible {
+            outline: 3px solid var(--oro);
+            outline-offset: 3px;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.3); border-radius: 10px; }
+
+        /* ===== CORRECCIONES PARA MÓVILES ===== */
+
+        /* Filas programadas: ajuste de línea en pantallas pequeñas */
+        @media (max-width: 480px) {
+            .schedule-row {
+                flex-wrap: wrap;
+                gap: 4px !important;
+            }
+            .schedule-row .schedule-hours {
+                width: 100%;
+                text-align: left;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Flecha de selección móvil */
+        #mobileNav {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 28px;
+        }
+
+        /* Ajuste de texto de la insignia de héroe */
+        .hero-badge {
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Social float smooth */
+        #socialFloat a {
+            transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+        }
+        #socialFloat a:active { transform: scale(0.88); transition-duration: 0.1s; }
+
+        /* Flotador social: más pequeño en pantallas muy pequeñas para que no bloqueen el contenido */
+        @media (max-width: 380px) {
+            #socialFloat { gap: 6px; bottom: 10px; right: 6px; }
+            #socialFloat a { height: 38px; width: 38px; font-size: 0.85rem; border-radius: 12px; }
+        }
+
+        /* Detail view mobile */
+        @media (max-width: 640px) {
+            #modal > div { padding: 10px; }
+            #modalTitle { font-size: 1.2rem; }
+        }
+
+        /* Cuadrícula de contactos: apilar en dispositivos móviles */
+        @media (max-width: 640px) {
+            #contacto .grid { gap: 2rem; }
+        }
+
+        /* Protección contra desbordamiento de texto de la tarjeta */
+        .card-glass h3 {
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        /* Relleno inferior del pie de página para permitir el paso de la flotación social en dispositivos móviles */
+        @media (max-width: 768px) {
+            footer { padding-bottom: 5rem; }
+        }
+
+        /* Color de texto para modo oscuro */
+        body.dark-mode input,
+        body.dark-mode textarea,
+        body.dark-mode select {
+            color: var(--tinta);
+        }
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder {
+            color: rgba(240,236,228,0.4);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+
+        /* ===== MEJORAS VISUALES ===== */
+
+        /* Pulso en badge Hoy */
+        .today-badge {
+            animation: pulseBadge 2s ease-in-out infinite;
+        }
+        @keyframes pulseBadge {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(212,175,55,0); }
+        }
+
+        /* Hover en iconos de sacramentos */
+        #sacramentos .card-glass:hover .fa-water,
+        #sacramentos .card-glass:hover .fa-bread-slice,
+        #sacramentos .card-glass:hover .fa-fire,
+        #sacramentos .card-glass:hover .fa-heart,
+        #sacramentos .card-glass:hover .fa-hands-praying,
+        #sacramentos .card-glass:hover .fa-hand-holding-heart {
+            animation: iconBounce 0.5s ease;
+        }
+        @keyframes iconBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Loader inicial */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--crema);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--linea);
+            border-top-color: var(--oro);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scroll to top button */
+        #scrollTop {
+            position: fixed;
+            bottom: 6px;
+            left: 16px;
+            z-index: 50;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+        #scrollTop.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Próxima misa highlight */
+        .next-mass {
+            position: relative;
+        }
+        .next-mass::after {
+            content: 'Próxima';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+
+        /* Ocultar redes sin link */
+        .social-hidden {
+            display: none !important;
+        }
+
+        /* Image lazy load fade */
+        img[data-src] {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        img.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- BACKGROUND BLOBS -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed left-4 right-4 top-4 z-[9000] mx-auto max-w-lg liquid-glass rounded-2xl p-4 text-sm leading-6 pointer-events-auto" style="opacity:0;transform:translateY(-20px);transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1),transform 0.5s cubic-bezier(0.16,1,0.3,1);pointer-events:none;"></div>
+
+    <!-- HERO -->
+    <header class="hero-wrap">
+        <div class="hero-img"></div>
+        <div class="hero-overlay"></div>
+
+        <nav class="relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-8 sm:py-5">
+            <button class="focus-ring flex items-center gap-2 sm:gap-3 text-left shrink-0" type="button" data-section="inicio" aria-label="Ir al inicio">
+                <img src="img/logo.png" alt="Logo" class="h-10 w-10 sm:h-11 sm:w-11 rounded-full border border-[#d4af37]/60 bg-white/80 object-contain p-1" onerror="this.style.display='none'">
+                <span class="cinzel text-xs sm:text-sm font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-white">Santa Bárbara</span>
+            </button>
+
+            <div class="hidden items-center gap-0.5 liquid-glass-strong rounded-full px-1.5 py-1 lg:flex">
+                <button class="nav-pill focus-ring rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-white/85" type="button" data-section="inicio">Inicio</button>
+                <button class="nav-pill focus-ring rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-white/85" type="button" data-section="noticias">Noticias</button>
+                <button class="nav-pill focus-ring rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-white/85" type="button" data-section="historia">Historia</button>
+                <button class="nav-pill focus-ring rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-white/85" type="button" data-section="apostolados">Apostolados</button>
+                <button class="nav-pill focus-ring rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-white/85" type="button" data-section="sacramentos">Sacramentos</button>
+                <button class="nav-pill focus-ring rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-white/85" type="button" data-section="galeria">Galería</button>
+                <button class="nav-pill focus-ring rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-widest text-white/85" type="button" data-section="contacto">Contacto</button>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="themeToggle" class="focus-ring liquid-glass rounded-full px-3 py-2 sm:px-4 text-xs font-bold uppercase tracking-widest text-white" type="button" aria-label="Modo oscuro">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div class="relative z-10 mx-auto flex min-h-[calc(100vh-80px)] min-h-[calc(100dvh-80px)] max-w-7xl items-center px-4 pb-16 pt-6 sm:px-8 sm:pb-20 sm:pt-8">
+            <div class="max-w-3xl w-full">
+                <div class="hero-badge inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#d4af37] backdrop-blur-sm mb-5 sm:mb-6 flex-wrap justify-center">
+                    <i class="fas fa-cross"></i>
+                    <span>Parroquia Santa Bárbara del Zulia</span>
+                </div>
+                <h1 class="cinzel text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
+                    Fe, Tradición<br>y Comunidad
+                </h1>
+                <p class="mt-4 sm:mt-6 max-w-xl text-sm sm:text-base md:text-lg leading-7 sm:leading-8 text-white/75">
+                    Una comunidad viva al servicio de la fe, en el corazón del Sur del Lago de Maracaibo.
+                </p>
+                <div class="mt-8 sm:mt-10 flex flex-col gap-3 sm:flex-row">
+                    <button class="focus-ring liquid-glass rounded-full px-5 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest transition hover:bg-[#d4af37] hover:text-[#002244]" style="color:#d4af37" type="button" data-section="inicio">
+                        <i class="fas fa-clock mr-2"></i>Horarios
+                    </button>
+                    <a id="radioBtn" href="#" target="_blank" rel="noopener noreferrer" class="focus-ring liquid-glass rounded-full px-5 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest text-white text-center transition hover:bg-white hover:text-[#002244]">
+                        <i class="fas fa-radio mr-2"></i>Radio en Vivo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN MÓVIL -->
+    <div class="sticky top-0 z-40 px-3 py-2 sm:px-4 sm:py-3 lg:hidden">
+        <div class="liquid-glass-strong rounded-2xl px-4 py-2">
+            <label for="mobileNav" class="sr-only">Sección</label>
+            <select id="mobileNav" class="focus-ring w-full bg-transparent text-sm font-semibold appearance-none py-2" style="color:var(--tinta)">
+                <option value="inicio">⛪ Inicio</option>
+                <option value="noticias">📰 Noticias</option>
+                <option value="historia">📜 Historia</option>
+                <option value="apostolados">✝️ Apostolados</option>
+                <option value="sacramentos">⛪ Sacramentos</option>
+                <option value="galeria">📷 Galería</option>
+                <option value="contacto">✉️ Contacto</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- SOCIAL FLOAT -->
+    <div class="fixed bottom-6 right-4 z-50 flex flex-col gap-3" id="socialFloat">
+        <a id="waFloat" href="#" target="_blank" rel="noopener noreferrer" class="liquid-glass focus-ring flex h-12 w-12 items-center justify-center rounded-2xl text-lg transition hover:scale-110" style="color:#25d366" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a id="igFloat" href="#" target="_blank" rel="noopener noreferrer" class="liquid-glass focus-ring flex h-12 w-12 items-center justify-center rounded-2xl text-lg transition hover:scale-110" style="color:#e1306c" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a id="fbFloat" href="#" target="_blank" rel="noopener noreferrer" class="liquid-glass focus-ring flex h-12 w-12 items-center justify-center rounded-2xl text-lg transition hover:scale-110" style="color:#1877f2" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+
+    <!-- SCROLL TO TOP -->
+    <button id="scrollTop" class="liquid-glass focus-ring flex h-11 w-11 items-center justify-center rounded-2xl text-sm transition hover:scale-110" style="color:var(--oro)" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ADMIN BUTTON -->
+    <button id="adminFab" style="position:fixed;bottom:10px;left:10px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--glass-bg);backdrop-filter:blur(12px);border:1px solid var(--linea);color:var(--oro);cursor:pointer;display:none;align-items:center;justify-content:center;font-size:15px;box-shadow:0 4px 16px var(--glass-shadow);transition:transform 0.2s,opacity 0.3s;opacity:0.4" aria-label="Editor">
+        <i class="fas fa-wrench"></i>
+    </button>
+
+    <!-- PRINCIPAL -->
+    <main class="mx-auto max-w-7xl px-4 py-10 sm:px-8 sm:py-20">
+
+        <!-- INICIO -->
+        <section id="inicio" class="page active">
+            <div class="reveal mb-8 sm:mb-12">
+                <p class="cinzel text-xs font-bold uppercase tracking-[0.3em] text-[#d4af37]">Celebraciones</p>
+                <h2 class="cinzel mt-3 text-2xl sm:text-3xl md:text-5xl font-bold">Horario de Misas</h2>
+            </div>
+
+            <div class="grid gap-8 sm:gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
+                <div class="reveal">
+                    <div id="scheduleGrid" class="flex flex-col gap-2"></div>
+                </div>
+
+                <div class="reveal">
+                    <div class="liquid-glass rounded-3xl p-5 sm:p-6 md:p-8">
+                        <div class="flex items-center gap-3 sm:gap-4 mb-4">
+                            <div class="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl" style="background:linear-gradient(135deg,#d4af37,#002244)">
+                                <i class="fas fa-radio text-lg sm:text-xl text-white"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <h3 class="cinzel text-base sm:text-lg font-bold" style="color:var(--oro)">Radio Online</h3>
+                                <p class="text-xs sm:text-sm opacity-70">Escucha la Misa en vivo</p>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-7 opacity-80 mb-5">Transmitimos las celebraciones principales por Comunión FM 105.7</p>
+                        <a id="radioLink" href="#" target="_blank" rel="noopener noreferrer" class="focus-ring inline-flex items-center gap-2 rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold uppercase tracking-widest text-white transition hover:scale-105" style="background:linear-gradient(135deg,#d4af37,#b8941f)">
+                            <i class="fas fa-play"></i> Escuchar Ahora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVISOS -->
+        <section id="noticias" class="page">
+            <div class="reveal mb-8 sm:mb-10">
+                <p class="cinzel text-xs font-bold uppercase tracking-[0.3em] text-[#d4af37]">Actualidad</p>
+                <h2 class="cinzel mt-3 text-2xl sm:text-3xl md:text-5xl font-bold">Noticias</h2>
+                <p class="mt-4 max-w-xl text-sm sm:text-base leading-7 opacity-70">Avisos y actividades de la comunidad parroquial.</p>
+            </div>
+            <div id="newsGrid" class="grid gap-4 sm:grid-cols-2"></div>
+            <div id="newsEmpty" class="hidden liquid-glass rounded-3xl p-8 sm:p-10 text-center">
+                <i class="fas fa-newspaper text-3xl sm:text-4xl mb-4 block" style="color:var(--oro)"></i>
+                <p class="font-semibold">Próximamente noticias nuevas</p>
+                <p class="text-sm opacity-60 mt-2">Vuelve pronto para enterarte de las actividades parroquiales.</p>
+            </div>
+        </section>
+
+        <!-- HISTORIA -->
+        <section id="historia" class="page">
+            <div class="reveal mb-8 sm:mb-10">
+                <p class="cinzel text-xs font-bold uppercase tracking-[0.3em] text-[#d4af37]">Memoria</p>
+                <h2 class="cinzel mt-3 text-2xl sm:text-3xl md:text-5xl font-bold">Historia Parroquial</h2>
+            </div>
+            <div id="historyGrid" class="grid gap-4 sm:grid-cols-2 mb-10 sm:mb-14"></div>
+
+            <div class="reveal mb-6 sm:mb-8">
+                <h3 class="cinzel text-xl sm:text-2xl font-bold">Sucesión Parroquial</h3>
+            </div>
+            <div id="priestsGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+        </section>
+
+        <!-- APOSTOLADOS -->
+        <section id="apostolados" class="page">
+            <div class="reveal mb-8 sm:mb-10">
+                <p class="cinzel text-xs font-bold uppercase tracking-[0.3em] text-[#d4af37]">Servicio</p>
+                <h2 class="cinzel mt-3 text-2xl sm:text-3xl md:text-5xl font-bold">Apostolados</h2>
+                <p class="mt-4 max-w-2xl text-sm sm:text-base leading-7 opacity-70">Grupos que sostienen la evangelización, la liturgia, la formación y la acción social de nuestra parroquia.</p>
+            </div>
+            <div id="groupsGrid" class="grid gap-4 sm:grid-cols-2"></div>
+        </section>
+
+        <!-- SACRAMENTOS -->
+        <section id="sacramentos" class="page">
+            <div class="reveal mb-8 sm:mb-10">
+                <p class="cinzel text-xs font-bold uppercase tracking-[0.3em] text-[#d4af37]">Vida Sacramental</p>
+                <h2 class="cinzel mt-3 text-2xl sm:text-3xl md:text-5xl font-bold">Sacramentos</h2>
+                <p class="mt-4 max-w-2xl text-sm sm:text-base leading-7 opacity-70">Los sacramentos son signos eficaces de la gracia de Dios, instituidos por Cristo y confiados a la Iglesia. Toca cada uno para conocer más detalles y requisitos.</p>
+            </div>
+            <div id="sacramentosGrid" class="grid gap-4 sm:grid-cols-2"></div>
+        </section>
+
+        <!-- GALERÍA -->
+        <section id="galeria" class="page">
+            <div class="reveal mb-8 sm:mb-10">
+                <p class="cinzel text-xs font-bold uppercase tracking-[0.3em] text-[#d4af37]">Vida Comunitaria</p>
+                <h2 class="cinzel mt-3 text-2xl sm:text-3xl md:text-5xl font-bold">Galería</h2>
+            </div>
+            <div id="galleryGrid" class="masonry"></div>
+            <div id="galleryEmpty" class="hidden liquid-glass rounded-3xl p-8 sm:p-10 text-center">
+                <i class="fas fa-images text-3xl sm:text-4xl mb-4 block" style="color:var(--oro)"></i>
+                <p class="font-semibold">Galería en construcción</p>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="page">
+            <div class="grid gap-8 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+                <div class="reveal">
+                    <p class="cinzel text-xs font-bold uppercase tracking-[0.3em] text-[#d4af37]">Contacto</p>
+                    <h2 class="cinzel mt-3 text-2xl sm:text-3xl md:text-5xl font-bold">Escríbenos</h2>
+                    <p class="mt-4 sm:mt-5 text-sm sm:text-base leading-7 sm:leading-8 opacity-70">Completa el formulario y se abrirá tu cliente de correo con el mensaje listo para enviar.</p>
+
+                    <div class="mt-6 sm:mt-8 flex flex-col gap-3">
+                        <a id="waLink" href="#" target="_blank" rel="noopener noreferrer" class="liquid-glass focus-ring card-glass flex items-center gap-4 rounded-2xl p-4">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background:#25d366"><i class="fab fa-whatsapp text-white"></i></div>
+                            <span class="font-semibold text-sm sm:text-base">WhatsApp</span>
+                        </a>
+                        <a id="igLink" href="#" target="_blank" rel="noopener noreferrer" class="liquid-glass focus-ring card-glass flex items-center gap-4 rounded-2xl p-4">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background:#e1306c"><i class="fab fa-instagram text-white"></i></div>
+                            <span class="font-semibold text-sm sm:text-base">Instagram</span>
+                        </a>
+                        <a id="fbLink" href="#" target="_blank" rel="noopener noreferrer" class="liquid-glass focus-ring card-glass flex items-center gap-4 rounded-2xl p-4">
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style="background:#1877f2"><i class="fab fa-facebook-f text-white"></i></div>
+                            <span class="font-semibold text-sm sm:text-base">Facebook</span>
+                        </a>
+                    </div>
+                </div>
+
+                <form id="emailForm" class="reveal liquid-glass-strong rounded-3xl p-4 sm:p-5 md:p-8">
+                    <div class="grid gap-4 sm:gap-5">
+                        <label class="grid gap-2 text-sm font-semibold" for="contactName">Tu nombre
+                            <input id="contactName" type="text" required autocomplete="name" class="focus-ring rounded-xl border border-[var(--linea)] px-4 py-3 font-normal text-sm sm:text-base" style="background:var(--glass-bg);color:var(--tinta)" placeholder="Nombre y apellido">
+                        </label>
+                        <label class="grid gap-2 text-sm font-semibold" for="contactSubject">Asunto
+                            <input id="contactSubject" type="text" required class="focus-ring rounded-xl border border-[var(--linea)] px-4 py-3 font-normal text-sm sm:text-base" style="background:var(--glass-bg);color:var(--tinta)" placeholder="Motivo del mensaje">
+                        </label>
+                        <label class="grid gap-2 text-sm font-semibold" for="contactMessage">Mensaje
+                            <textarea id="contactMessage" required rows="4" class="focus-ring resize-y rounded-xl border border-[var(--linea)] px-4 py-3 font-normal text-sm sm:text-base" style="background:var(--glass-bg);color:var(--tinta)" placeholder="Escribe tu mensaje"></textarea>
+                        </label>
+                        <button class="focus-ring rounded-full px-6 sm:px-7 py-3.5 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-widest text-white transition hover:scale-[1.02]" style="background:linear-gradient(135deg,#002244,#003366)" type="submit">
+                            <i class="fas fa-paper-plane mr-2"></i>Enviar Correo
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="liquid-glass-strong border-t border-[var(--linea)] px-4 sm:px-5 py-10 sm:py-12 text-center">
+        <div class="mx-auto max-w-7xl">
+            <img src="img/logo.png" alt="Logo" class="mx-auto mb-4 h-12 w-12 sm:h-14 sm:w-14 rounded-full border border-[#d4af37]/40 bg-white/50 object-contain p-1" onerror="this.style.display='none'">
+            <p class="cinzel text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.24em]" style="color:var(--oro)">Diócesis El Vigía San Carlos del Zulia</p>
+            <p class="mt-2 text-xs sm:text-sm opacity-60">Parroquia Santa Bárbara del Zulia</p>
+            <div class="mt-5 flex justify-center gap-4">
+                <a id="waFoot" href="#" target="_blank" rel="noopener noreferrer" class="focus-ring flex h-10 w-10 items-center justify-center rounded-xl liquid-glass transition hover:scale-110" style="color:#25d366"><i class="fab fa-whatsapp"></i></a>
+                <a id="igFoot" href="#" target="_blank" rel="noopener noreferrer" class="focus-ring flex h-10 w-10 items-center justify-center rounded-xl liquid-glass transition hover:scale-110" style="color:#e1306c"><i class="fab fa-instagram"></i></a>
+                <a id="fbFoot" href="#" target="_blank" rel="noopener noreferrer" class="focus-ring flex h-10 w-10 items-center justify-center rounded-xl liquid-glass transition hover:scale-110" style="color:#1877f2"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="mt-6 text-xs opacity-40">© 2026 Parroquia Santa Bárbara · Starboy</p>
+        </div>
+    </footer>
+
+    <!-- DETAIL VIEW -->
+    <div id="modal" class="fixed inset-0 z-[999] modal-bg overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="w-full min-h-screen px-4 py-5 sm:px-6 sm:py-8 md:px-8">
+            <div class="detail-inner">
+                <div class="sticky top-0 z-10 pb-3 pt-1" style="background:linear-gradient(to bottom, var(--crema) 70%, transparent)">
+                    <button id="modalClose" class="focus-ring flex items-center gap-2 rounded-full liquid-glass px-5 py-2.5 text-xs sm:text-sm font-semibold uppercase tracking-widest transition hover:scale-[1.02]" style="color:var(--oro)" type="button" aria-label="Cerrar">
+                        <i class="fas fa-arrow-left text-[10px]"></i> Volver
+                    </button>
+                </div>
+
+                <h2 id="modalTitle" class="cinzel text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8" style="color:var(--oro)"></h2>
+
+                <div id="modalText" class="detail-body text-sm sm:text-base opacity-85 mb-6 sm:mb-8"></div>
+
+                <div id="modalCoordinators" class="grid gap-3 sm:grid-cols-2 mb-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <img id="lbImg" src="" alt="Zoom">
+    </div>
+
+    <!-- PASSWORD PROMPT -->
+    <div id="adminLogin" style="position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center">
+        <div style="background:var(--crema);border-radius:20px;padding:28px;width:90%;max-width:340px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+            <div style="text-align:center;margin-bottom:20px">
+                <i class="fas fa-lock" style="font-size:28px;color:var(--oro);margin-bottom:10px;display:block"></i>
+                <p class="cinzel" style="font-weight:700;font-size:16px;color:var(--tinta)">Acceso Privado</p>
+                <p style="font-size:12px;opacity:0.5;color:var(--tinta);margin-top:4px">Ingresa la clave del editor</p>
+            </div>
+            <input id="adminPwd" type="password" placeholder="Contraseña" style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--linea);background:var(--glass-bg);color:var(--tinta);font-size:14px;outline:none;text-align:center;letter-spacing:4px">
+            <p id="adminPwdError" style="color:#d03040;font-size:11px;text-align:center;margin-top:8px;display:none">Clave incorrecta</p>
+            <div style="display:flex;gap:8px;margin-top:16px">
+                <button id="adminPwdCancel" style="flex:1;padding:12px;border-radius:10px;border:1px solid var(--linea);background:var(--glass-bg);color:var(--tinta);cursor:pointer;font-weight:600;font-size:13px">Cancelar</button>
+                <button id="adminPwdOk" style="flex:1;padding:12px;border-radius:10px;border:none;background:linear-gradient(135deg,#d4af37,#b8941f);color:#002244;cursor:pointer;font-weight:700;font-size:13px">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="hidden" style="position:fixed;inset:0;z-index:99998;background:var(--crema);overflow-y:auto">
+        <div style="max-width:700px;margin:0 auto;padding:16px 16px 40px">
+            <!-- Header -->
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 16px;border-bottom:1px solid var(--linea);margin-bottom:20px">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <i class="fas fa-church" style="color:var(--oro);font-size:20px"></i>
+                    <div>
+                        <p class="cinzel" style="font-weight:700;font-size:15px;color:var(--tinta)">Editor de Sacramentos</p>
+                        <p style="font-size:11px;opacity:0.5;color:var(--tinta)">Edita, agrega o elimina sacramentos</p>
+                    </div>
+                </div>
+                <button id="adminClose" style="width:36px;height:36px;border-radius:50%;background:var(--glass-bg);border:1px solid var(--linea);color:var(--tinta);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center">×</button>
+            </div>
+
+            <!-- Sacramento tabs -->
+            <div id="adminTabs" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid var(--linea)"></div>
+
+            <!-- Sacramento editor (one at a time) -->
+            <div id="adminEditor"></div>
+
+            <!-- Actions -->
+            <div style="display:flex;gap:8px;margin-top:24px;flex-wrap:wrap">
+                <button id="adminAdd" style="flex:1;min-width:120px;padding:12px;border-radius:12px;border:1px dashed var(--linea);background:transparent;color:var(--oro);cursor:pointer;font-weight:700;font-size:13px">+ Nuevo</button>
+                <button id="adminApply" style="flex:1;min-width:120px;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#d4af37,#b8941f);color:#002244;cursor:pointer;font-weight:700;font-size:13px"><i class="fas fa-check" style="margin-right:6px"></i>Aplicar</button>
+                <button id="adminDownload" style="flex:1;min-width:120px;padding:12px;border-radius:12px;border:none;background:linear-gradient(135deg,#002244,#003366);color:white;cursor:pointer;font-weight:700;font-size:13px"><i class="fas fa-download" style="margin-right:6px"></i>Descargar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carga config.js de tu app Python (si existe, sobreescribe DATA) -->
+    <script>var _EXTERNAL_DATA = null;</script>
+    <script src="config.js" onerror="console.log('[INFO] config.js no encontrado, usando datos internos')"></script>
+    <script>if (typeof DATA !== 'undefined') _EXTERNAL_DATA = DATA;</script>
+
+    <script>
+    (function() {
+        'use strict';
+
+        /* ===== DATOS ===== */
+        /* Si config.js cargó DATA, usarlo. Si no, usar estos de respaldo. */
+        var DATA = _EXTERNAL_DATA || {
+            "historia_parroquia": {
+                "texto": "La fe en Santa Bárbara del Zulia no es solo una herencia, sino un relato vivo que se ha tejido a las orillas del río Escalante. Desde las primeras misiones que llegaron a estas tierras fértiles, la devoción ha sido el motor que impulsó el crecimiento de nuestro pueblo. Nuestra Crónica es un viaje al pasado para honrar a los hombres y mujeres que, con sacrificio y esperanza, colocaron las primeras piedras de nuestros templos y fundaron las tradiciones que hoy nos definen.\n\nExplorar los orígenes de nuestra fe es entender cómo la identidad del habitante de Santa Bárbara se forjó bajo el amparo de la Iglesia. A través de documentos históricos, relatos de nuestros mayores y el registro de la labor de sacerdotes que dejaron huella en el Sur del Lago, este espacio busca preservar el legado de nuestra comunidad parroquial. Te invitamos a conocer las raíces que sostienen nuestra esperanza y a valorar el camino recorrido por quienes nos precedieron en el servicio a Dios y al prójimo.",
+                "fotos": [
+                    "img/galeria/general/img_5626.jpeg",
+                    "img/patrimonio/historia/img_4111.jpg"
+                ]
+            },
+            "parrocos": {
+                "Pbro William Nelson Zerpa Uzcátegui": {
+                    "texto": "Actual paroco",
+                    "fotos": [
+                        "img/historias/clero/img_3912.jpg"
+                    ]
+                }
+            },
+            "tradiciones": {
+                "texto": "La vida espiritual en Santa Bárbara se manifiesta con especial fuerza a través de sus expresiones públicas de fe, donde la devoción popular y la cultura local se abrazan. Nuestras tradiciones son mucho más que eventos en el calendario; son el corazón de una comunidad que se reconoce en la oración compartida y en el respeto por lo sagrado.\n\nDesde las solemnes procesiones que recorren nuestras calles, llevando en hombros las imágenes que han acompañado a generaciones, hasta las vibrantes fiestas patronales, cada celebración es un testimonio de identidad. Estas costumbres sagradas, heredadas de nuestros abuelos y mantenidas con fervor por los jóvenes, representan el compromiso de un pueblo que celebra la vida bajo la mirada de Dios.",
+                "fotos": [
+                    "img/patrimonio/tradicion/img_0147.jpeg"
+                ]
+            },
+            "link_radio": "https://comunionfm.web.ve/105fmsantabarbara/",
+            "anuncio_popup": "¡Inauguramos nuestra página!",
+            "noticias": [],
+            "fotos_galeria": [
+                {
+                    "url": "img/galeria/general/img_0556.jpeg",
+                    "pie": "Sábado de Gloria"
+                }
+            ],
+            "descripciones_grupos": {
+                "Acción Católica": {
+                    "desc": "Un movimiento de laicos comprometidos con la evangelización directa en los ambientes cotidianos. Su misión es trabajar por la dignidad de la persona y el bien común, uniendo la fe con el compromiso social y la formación doctrinal constante.",
+                    "fotos": [],
+                    "color": "#880808",
+                    "color2": "#e3dac9",
+                    "logo": "img/logos/acción_católica/img_0805.jpeg"
+                },
+                "Cáritas": {
+                    "desc": "Es el rostro misericordioso de nuestra Iglesia. Se encarga de la asistencia social y la caridad organizada, brindando apoyo a los hermanos más vulnerables a través de programas de alimentación, salud y acompañamiento humano en momentos de dificultad.",
+                    "fotos": [],
+                    "color": "#e31e24",
+                    "color2": "#e31e24",
+                    "logo": "img/logos/cáritas/img_4214.jpeg",
+                    "coordinadores": [
+                        {
+                            "nombre": "Edenis",
+                            "desde": "2024",
+                            "bio": "",
+                            "foto": "img/grupos/coordinadores/img_4356.jpeg"
+                        }
+                    ]
+                },
+                "Catequesis": {
+                    "desc": "El corazón de la formación cristiana. Sus catequistas acompañan a niños, jóvenes y adultos en el conocimiento de la fe y la preparación para recibir los sacramentos, sembrando la semilla del Evangelio en las nuevas generaciones.",
+                    "fotos": [],
+                    "color": "#48d1cc"
+                },
+                "Cofradía de la Chinita": {
+                    "desc": "Guardianes del fervor mariano zuliano. Este grupo organiza y promueve la devoción a nuestra Virgen del Rosario de Chiquinquirá, celebrando con orgullo nuestras raíces y el amor de María por sus hijos.",
+                    "fotos": []
+                },
+                "Cofradía del Santísimo": {
+                    "desc": "Dedicada exclusivamente a la adoración y honra de Jesús Sacramentado. Sus miembros promueven la devoción eucarística, la Hora Santa y el respeto profundo hacia el altar, siendo el pilar espiritual de la parroquia.",
+                    "fotos": []
+                },
+                "Consejo Económico": {
+                    "desc": "Órgano encargado de la administración transparente y responsable de los recursos de la parroquia. Trabaja en la planificación y mantenimiento del templo y sus obras, asegurando que los aportes de la comunidad se utilicen para el bien de la misión evangelizadora.",
+                    "fotos": [],
+                    "color": "#f400ea",
+                    "color2": "#d4af37"
+                },
+                "Cursillos de Cristiandad": {
+                    "desc": "Un movimiento que busca que las personas vivan lo fundamental cristiano a través de un encuentro personal con Cristo. Su método ayuda a los fieles a fermentar de Evangelio sus ambientes de trabajo, familia y amistad.",
+                    "fotos": []
+                },
+                "EFV (Encuentros Familiares de Venezuela)": {
+                    "desc": "Es un movimiento apostólico laical y católico, sin fines de lucro, dedicado a evangelizar, fortalecer y sanar las relaciones familiares en el país. Avalado por la Conferencia Episcopal Venezolana y vinculado internacionalmente a la fundación FIRES, el movimiento busca transformar cada hogar en una \"iglesia doméstica\" mediante la vivencia práctica de los valores cristianos, el perdón y el diálogo profundo.\n\nCon presencia en más de 60, EFV se organiza a través de equipos voluntarios de matrimonios, jóvenes y asesores espirituales que dictan retiros, talleres y jornadas específicas.",
+                    "fotos": [],
+                    "color": "#ff5500",
+                    "color2": "#ff5500",
+                    "logo": "img/logos/efv_(encuentros_familiares_de_venezuela)/img_2134.png"
+                },
+                "El Llamado de Samuel": {
+                    "desc": "Es una experiencia de retiro espiritual diseñada exclusivamente para los adolescentes de nuestra comunidad. Este encuentro busca crear un espacio de desconexión del ruido cotidiano para que cada joven pueda reconocer la voz de Dios en su propia vida, inspirados en la respuesta del joven Samuel.",
+                    "fotos": [],
+                    "color": "#f2c94c",
+                    "color2": "#f2c94c"
+                },
+                "Emaús Hombres": {
+                    "desc": "Grupos de retiro y hermandad que ofrecen una experiencia de renovación espiritual profunda. A través del testimonio y el encuentro con el Señor Resucitado, ayudan a los hombres a transformar sus vidas y caminar con Cristo.",
+                    "fotos": [],
+                    "color": "#0000ff",
+                    "color2": "#0000ff"
+                },
+                "Emaús Mujeres": {
+                    "desc": "Grupos de retiro y hermandad que ofrecen una experiencia de renovación espiritual profunda. A través del testimonio y el encuentro con el Señor Resucitado, ayudan a las mujeres a transformar sus vidas y caminar con esperanza.",
+                    "fotos": []
+                },
+                "Monaguillos": {
+                    "desc": "Pequeños servidores del altar que, con su alegría y orden, asisten a los sacerdotes en las celebraciones litúrgicas. Es un espacio de formación temprana en la fe y de servicio directo al misterio de la Eucaristía.",
+                    "fotos": [],
+                    "color": "#990000",
+                    "color2": "#f2f2f2"
+                },
+                "Músico Coro Niño": {
+                    "desc": "El ministerio encargado de embellecer la liturgia con el canto y la música. A través de sus voces, los más pequeños alaban a Dios y ayudan a la asamblea a elevar su espíritu durante las celebraciones.",
+                    "fotos": []
+                },
+                "Palmeros": {
+                    "desc": "Custodios de una tradición centenaria que une la naturaleza con la fe. Este grupo es el encargado de la recolección y preparación de las palmas para el Domingo de Ramos, simbolizando la entrada triunfal de Jesús en nuestras vidas.",
+                    "fotos": []
+                },
+                "Pastoral Familiar": {
+                    "desc": "Un espacio dedicado al fortalecimiento del núcleo fundamental de la sociedad. Busca orientar, acompañar y sanar a las familias, promoviendo los valores cristianos en el hogar.",
+                    "fotos": []
+                },
+                "Pastoral Juvenil": {
+                    "desc": "Un espacio dinámico para adolescentes y jóvenes que buscan vivir su fe con alegría. Incluye la formación de líderes y el trabajo en valores, integrando la energía juvenil en la misión de la Iglesia.",
+                    "fotos": []
+                },
+                "Rosario en Familia": {
+                    "desc": "Apostolado que fomenta la oración mariana desde el hogar. Su objetivo es que cada casa se convierta en una Iglesia doméstica, donde el rezo del Santo Rosario sea el vínculo de unión y paz.",
+                    "fotos": []
+                }
+            },
+            "redes": {
+                "instagram": "https://www.instagram.com/hermandadesamuel.sb?igsh=N2MwbzI4bm5jcWV6",
+                "facebook": "",
+                "whatsapp": ""
+            }
+        };
+
+        /* ===== DATOS DE SACRAMENTOS (hardcoded) ===== */
+        const SACRAMENTOS = {
+            "Bautismo": {
+        "icono": "fa-water",
+        "color": "#4fc3f7",
+        "color2": "#0288d1",
+        "resumen": "Sacramento de iniciación cristiana que nos incorpora a la Iglesia.",
+        "descripcion": "El Bautismo es el fundamento de toda la vida cristiana, el pórtico de la vida en el Espíritu y la puerta que abre el acceso a los otros sacramentos. Por el Bautismo somos liberados del pecado y regenerados como hijos de Dios, llegamos a ser miembros de Cristo y somos incorporados a la Iglesia.\n\nEste sacramento nos une a la muerte y resurrección de Cristo, nos purifica de todo pecado y nos hace nacer a una vida nueva. El agua bautismal simboliza la muerte al pecado y el nacimiento a la vida de la gracia. Es un regalo inmerecido de Dios que nos marca para siempre como sus hijos amados.\n\nEn nuestra parroquia celebramos este sacramento con alegría, acogiendo a los nuevos miembros de la familia de Dios con los brazos abiertos.",
+        "requisitos": [
+            "Copia de la partida de nacimiento.",
+            "Nombre completo de los padrinos anotado en un papel.",
+            "Deben ser mayores de edad (los menores de edad no pueden ser padrinos).",
+            "Deben ser católicos practicantes de la fe y no asistir a ninguna secta protestante (como evangélicos o testigos de Jehová).",
+            "Si es una sola pareja (hembra y varón): 10 dólares o 50,000 pesos.",
+            "Si son más de dos parejas: 5 dólares o 25,000 pesos por pareja.",
+            "Traer una vela.",
+            "Traer un paño blanco.",
+            "Presentar todos los requisitos mencionados."
+        ],
+        "horario": "Los bautizos son a las 4:00 PM. Se debe asistir con media hora de anticipación (3:30 PM).",
+        "nota": "Las inscripciones se realizan en la oficina parroquial de lunes a viernes. Se recomienda inscribirse con al menos 3 semanas de anticipación."
+    },
+            "Primera Comunión": {
+        "icono": "fa-bread-slice",
+        "color": "#fff176",
+        "color2": "#f9a825",
+        "resumen": "El primer encuentro pleno con Cristo en la Eucaristía.",
+        "descripcion": "La Primera Comunión es el momento en que el niño o niña recibe por primera vez el Cuerpo y la Sangre de Cristo en la Eucaristía. Este sacramento es el centro de la vida cristiana, porque en él recibimos al mismo Jesús, que se entrega por amor a nosotros.\n\nLa Eucaristía es alimento para el alma, fuente de gracia y fortaleza para el camino de la vida. En ella celebramos el sacrificio de Cristo en la cruz y su resurrección gloriosa. Cada vez que comulgamos, nos unimos más íntimamente a Jesús y a toda la Iglesia.\n\nLa preparación para este sacramento es un tiempo de formación en la fe, donde los niños aprenden sobre el amor de Dios, la vida de Jesús, los mandamientos y las oraciones fundamentales de nuestra fe católica.",
+        "requisitos": [
+            "Fe de bautismo.",
+            "Copia de la cédula de los padres.",
+            "Copia de la cédula del niño (en caso de que ya tenga).",
+            "1 carpeta marrón para guardar los documentos.",
+            "Tener 10 años en adelante.",
+            "El representante del niño debe comprometerse formalmente a asistir a las actividades del niño."
+        ],
+        "horario": "Inscripciones: Julio - Septiembre de cada año",
+        "nota": "Las clases de catequesis se imparten los sábados. La celebración de Primera Comunión se realiza generalmente en el mes de Julio"
+    },
+           "Confirmación": {
+        "icono": "fa-fire",
+        "color": "#ef5350",
+        "color2": "#c62828",
+        "resumen": "El sacramento que nos fortalece con los dones del Espíritu Santo.",
+        "descripcion": "La Confirmación es el sacramento que completa la gracia del Bautismo. Por este sacramento, el bautizado se fortalece con el don del Espíritu Santo para ser testigo de Cristo en el mundo, de palabra y de obra.\n\nEn Pentecostés, el Espíritu Santo descendió sobre los apóstoles y los transformó en valientes predicadores del Evangelio. Del mismo modo, en la Confirmación recibimos los siete dones del Espíritu Santo: sabiduría, entendimiento, consejo, fortaleza, ciencia, piedad y temor de Dios.\n\nEste sacramento nos compromete más firmemente con Cristo, nos une más perfectamente a la Iglesia y nos concede una fuerza especial del Espíritu Santo para difundir y defender la fe, para confesar el nombre de Cristo y para no avergonzarnos nunca de la Cruz.",
+        "requisitos": [
+            "Fe de bautismo.",
+            "Constancia de Primera Comunión.",
+            "Copia de la cédula de los padres.",
+            "Copia de la cédula del niño.",
+            "1 carpeta marrón para la entrega de los documentos.",
+            "Tener 13 años en adelante."
+        ],
+        "horario": "Edad mínima: 13 años. Inscripciones según calendario parroquial",
+        "nota": "La Confirmación es administrada por el Obispo."
+    },
+            "Matrimonio": {
+        "icono": "fa-heart",
+        "color": "#e91e63",
+        "color2": "#880e4f",
+        "resumen": "La alianza sagrada de amor entre un hombre y una mujer.",
+        "descripcion": "El Matrimonio es la alianza por la cual un hombre y una mujer constituyen una íntima comunidad de vida y de amor. Esta alianza, fundada y estructurada por el Creador, está ordenada por su propia naturaleza al bien de los cónyuges y a la generación y educación de los hijos.\n\nCristo elevó el matrimonio entre bautizados a la dignidad de sacramento. Los esposos, como ministros de la gracia de Cristo, se confieren mutuamente el sacramento del Matrimonio expresando su consentimiento ante la Iglesia.\n\nEl amor conyugal comporta una totalidad en la que entran todos los elementos de la persona: cuerpo, sentimiento, afectividad, aspiración del espíritu y de la voluntad. Es un amor fiel, exclusivo y fecundo, abierto a la vida y dispuesto a acoger el don de los hijos como bendición de Dios.",
+        "requisitos": [
+            "1 foto tipo carnet de cada uno.",
+            "Copia ampliada de la cédula de identidad.",
+            "Partida de nacimiento de ambos.",
+            "Fe de bautismo de los contrayentes.",
+            "Constancia de Confirmación.",
+            "Constancia de cursillo pre-matrimonial.",
+            "Constancia del matrimonio civil.",
+            "Deben ser dos testigos mayores de edad.",
+            "No pueden ser familiares de los novios.",
+            "Deben conocer a los novios desde hace un mínimo de 5 años.",
+            "Se requiere la copia ampliada de la cédula de los testigos."
+        ],
+        "horario": "Solicitar cita con al menos 3-6 meses de anticipación",
+        "nota": "El curso pre-matrimonial es obligatorio y se ofrece en fechas establecidas por la parroquia."
+    },
+            "Confesión": {
+                "icono": "fa-hands-praying",
+                "color": "#ab47bc",
+                "color2": "#6a1b9a",
+                "resumen": "El sacramento del perdón y la reconciliación con Dios.",
+                "descripcion": "La Confesión, también llamada sacramento de la Reconciliación o de la Penitencia, es el sacramento instituido por Jesucristo para perdonar los pecados cometidos después del Bautismo. En él, el pecador se presenta ante Dios, reconoce sus faltas con humildad y recibe el perdón divino a través del ministerio del sacerdote.\n\nJesús dijo a sus apóstoles: \"Reciban el Espíritu Santo; a quienes perdonen los pecados, les quedan perdonados\" (Juan 20,22-23). Por eso, cuando nos confesamos, es el mismo Cristo quien nos perdona a través del sacerdote.\n\nEste sacramento tiene cuatro elementos esenciales: el examen de conciencia, el arrepentimiento sincero (contrición), la confesión de los pecados al sacerdote, y el cumplimiento de la penitencia. El secreto de confesión es absoluto e inviolable.",
+                "requisitos": [
+                    "Examen de conciencia previo",
+                    "Arrepentimiento sincero de los pecados",
+                    "Propósito de enmienda",
+                    "Disposición para cumplir la penitencia",
+                    "No se requiere cita previa para confesiones ordinarias"
+                ],
+                "horario": "30 minutos antes de cada Misa. Jueves sacerdotales: 5:00 PM",
+                "nota": "En tiempos especiales como Cuaresma y Adviento se organizan jornadas penitenciales con varios sacerdotes. Para confesiones fuera de horario, coordinar con el párroco."
+            },
+            "Unción de los Enfermos": {
+                "icono": "fa-hand-holding-heart",
+                "color": "#66bb6a",
+                "color2": "#2e7d32",
+                "resumen": "Consuelo y fortaleza espiritual para los enfermos y ancianos.",
+                "descripcion": "La Unción de los Enfermos es el sacramento que da a los enfermos la gracia del Espíritu Santo para su fortaleza, paz y valentía ante la enfermedad. No es un sacramento solo para quienes están a punto de morir, sino para todo aquel que padece una enfermedad grave o sufre las debilidades de la vejez.\n\nSantiago nos dice: \"¿Está enfermo alguno de ustedes? Llame a los presbíteros de la Iglesia, que oren sobre él y lo unjan con óleo en el nombre del Señor\" (Santiago 5,14). Este sacramento une al enfermo a la Pasión de Cristo, le concede consuelo, paz y fortaleza.\n\nLa Iglesia ofrece también el Viático, que es la Eucaristía recibida por quienes están a punto de dejar esta vida, como alimento para el paso a la vida eterna. Es el sacramento del cristiano que parte hacia la casa del Padre.",
+                "requisitos": [
+                    "Estar en situación de enfermedad grave o vejez avanzada",
+                    "Solicitarlo personalmente o a través de familiares",
+                    "Disposición espiritual para recibir el sacramento",
+                    "Si es posible, haber recibido la Confesión previamente"
+                ],
+                "horario": "Disponible en cualquier momento de necesidad",
+                "nota": "Para emergencias o personas hospitalizadas, llamar inmediatamente a la parroquia. También se administra en hospitales, clínicas y hogares. En peligro de muerte, el sacerdote acudirá de inmediato."
+            }
+        };
+
+        /* ===== ESTADO Y REFERENCIAS DOM ===== */
+        const state = { activeSection: 'inicio', lastFocus: null };
+        const SECTIONS = ['inicio', 'noticias', 'historia', 'apostolados', 'sacramentos', 'galeria', 'contacto'];
+
+        function $(id) { return document.getElementById(id); }
+        function $$(sel) { return Array.from(document.querySelectorAll(sel)); }
+
+        /* ===== AYUDANTES ===== */
+        function getContent(item) {
+            if (!item) return '';
+            if (typeof item === 'string') return item;
+            return item.texto || item.desc || item.cuerpo || item.body || '';
+        }
+
+        function getImages(item) {
+            if (!item || typeof item === 'string') return [];
+            if (Array.isArray(item.fotos)) return item.fotos.filter(Boolean);
+            if (Array.isArray(item.foto)) return item.foto.filter(Boolean);
+            if (item.foto && typeof item.foto === 'string') return [item.foto];
+            if (item.url) return [item.url];
+            return [];
+        }
+
+        function truncate(text, len) {
+            if (!text) return '';
+            return text.length > len ? text.slice(0, len) + '…' : text;
+        }
+
+        function escHtml(str) {
+            if (!str) return '';
+            var d = document.createElement('div');
+            d.textContent = String(str);
+            return d.innerHTML;
+        }
+
+        /* ===== CONSTRUCTOR DE TARJETAS ===== */
+        function makeCard(title, subtitle, item, opts) {
+            opts = opts || {};
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'focus-ring liquid-glass card-glass w-full rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6 text-left ' + (opts.extraClass || '');
+            if (opts.borderColor) btn.style.borderLeft = '6px solid ' + opts.borderColor;
+            btn.addEventListener('click', function() { openModal(title, item); });
+
+            var html = '';
+            if (opts.logo) {
+                html += '<div class="flex items-start gap-3 sm:gap-4">' +
+                    '<img src="' + opts.logo + '" alt="' + escHtml(title) + '" class="h-11 w-11 sm:h-14 sm:w-14 shrink-0 rounded-xl sm:rounded-2xl border border-[var(--linea)] bg-white/60 object-contain p-1" onerror="this.style.display=\'none\'">' +
+                    '<div class="min-w-0">' +
+                    '<h3 class="cinzel text-sm sm:text-base md:text-lg font-bold leading-snug">' + escHtml(title) + '</h3>' +
+                    (subtitle ? '<p class="mt-1 sm:mt-1.5 text-xs sm:text-sm leading-5 sm:leading-6 opacity-65">' + escHtml(subtitle) + '</p>' : '') +
+                    '</div></div>';
+            } else {
+                html += '<h3 class="cinzel text-sm sm:text-base md:text-lg font-bold">' + escHtml(title) + '</h3>';
+                if (subtitle) html += '<p class="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-5 sm:leading-6 opacity-65">' + escHtml(subtitle) + '</p>';
+            }
+            btn.innerHTML = html;
+            return btn;
+        }
+
+        /* ===== NAVEGACIÓN ===== */
+        function showSection(id, shouldScroll) {
+            if (typeof shouldScroll === 'undefined') shouldScroll = true;
+            state.activeSection = id;
+            saveSection(id);
+
+            $$('.page').forEach(function(s) { s.classList.toggle('active', s.id === id); });
+            $$('.nav-pill').forEach(function(b) {
+                var active = b.dataset.section === id;
+                b.setAttribute('aria-current', active ? 'page' : 'false');
+            });
+
+            var mobileNav = $('mobileNav');
+            if (mobileNav) mobileNav.value = id;
+
+            if (shouldScroll) {
+                var main = document.querySelector('main');
+                if (main) window.scrollTo({ top: main.offsetTop - 20, behavior: 'smooth' });
+            }
+
+            requestAnimationFrame(function() {
+                $$('.page.active .reveal').forEach(function(el, i) {
+                    el.style.transitionDelay = Math.min(i * 0.07, 0.35) + 's';
+                    el.classList.add('visible');
+                });
+            });
+        }
+
+        /* ===== MODAL ===== */
+        function openModal(title, item) {
+            var modal = $('modal');
+            var modalTitle = $('modalTitle');
+            var modalText = $('modalText');
+            var modalCoordinators = $('modalCoordinators');
+
+            if (!modal || !modalTitle || !modalText) return;
+
+            state.lastFocus = document.activeElement;
+            modalTitle.textContent = title;
+            modalText.innerHTML = '';
+            if (modalCoordinators) modalCoordinators.innerHTML = '';
+
+            var fullText = getContent(item);
+            var images = getImages(item);
+            var paragraphs = fullText.split(/\n\n+/).filter(function(p) { return p.trim(); });
+            var hasCoords = item && Array.isArray(item.coordinadores) && item.coordinadores.length > 0;
+
+            /* ── Build content ── */
+            var html = '';
+            if (hasCoords && paragraphs.length > 0) {
+                html += '<p class="cinzel text-xs font-bold uppercase tracking-[0.3em] mb-4" style="color:var(--oro)">Descripción</p>';
+            }
+
+            if (paragraphs.length === 0 && images.length === 0) {
+                html = '<p style="opacity:0.5">Sin contenido disponible.</p>';
+
+            } else if (paragraphs.length === 0 && images.length > 0) {
+                /* Only images */
+                if (images.length === 1) {
+                    html += makeImgHtml(images[0], title);
+                } else {
+                    html += '<div class="d-img-pair">';
+                    images.forEach(function(s) { html += '<img src="'+s+'" alt="" loading="lazy" onclick="openLightbox(this.src)" onerror="this.remove()">'; });
+                    html += '</div>';
+                }
+
+            } else {
+                /* Text + images mixed */
+                var imgQueue = images.slice();
+
+                for (var i = 0; i < paragraphs.length; i++) {
+                    /* First paragraph: if there's an image, float it or show full */
+                    if (i === 0 && imgQueue.length > 0) {
+                        if (paragraphs.length >= 2) {
+                            html += '<div class="d-img d-img-float"><img src="'+imgQueue.shift()+'" alt="" loading="lazy" onclick="openLightbox(this.src)" onerror="this.parentElement.remove()"></div>';
+                        } else {
+                            html += makeImgHtml(imgQueue.shift(), title);
+                        }
+                    }
+
+                    html += '<p>' + escHtml(paragraphs[i].trim()) + '</p>';
+
+                    /* After second paragraph: full width image if available */
+                    if (i === 1 && imgQueue.length > 0) {
+                        html += makeImgHtml(imgQueue.shift(), title);
+                    }
+
+                    /* After every 3rd paragraph after that: pair or single */
+                    if (i > 1 && i % 3 === 0 && imgQueue.length > 0) {
+                        if (imgQueue.length >= 2) {
+                            html += '<div class="d-img-pair">';
+                            html += '<img src="'+imgQueue.shift()+'" alt="" loading="lazy" onclick="openLightbox(this.src)" onerror="this.remove()">';
+                            html += '<img src="'+imgQueue.shift()+'" alt="" loading="lazy" onclick="openLightbox(this.src)" onerror="this.remove()">';
+                            html += '</div>';
+                        } else {
+                            html += makeImgHtml(imgQueue.shift(), title);
+                        }
+                    }
+                }
+
+                /* Remaining images at end */
+                if (imgQueue.length === 1) {
+                    html += makeImgHtml(imgQueue[0], title);
+                } else if (imgQueue.length > 1) {
+                    html += '<div class="d-img-pair">';
+                    imgQueue.forEach(function(s) { html += '<img src="'+s+'" alt="" loading="lazy" onclick="openLightbox(this.src)" onerror="this.remove()">'; });
+                    html += '</div>';
+                }
+            }
+
+            modalText.innerHTML = html;
+
+            /* ── Coordinadores ── */
+            var coords = item && Array.isArray(item.coordinadores) ? item.coordinadores : [];
+            if (coords.length > 0 && modalCoordinators) {
+                var coordHeader = document.createElement('div');
+                coordHeader.className = 'mb-4';
+                coordHeader.innerHTML = '<p class="cinzel text-xs font-bold uppercase tracking-[0.3em]" style="color:var(--oro)">Coordinadores</p>';
+                modalCoordinators.appendChild(coordHeader);
+                coords.forEach(function(c) {
+                    var ini = (c.nombre || 'C').charAt(0).toUpperCase();
+                    var cardEl = document.createElement('button');
+                    cardEl.type = 'button';
+                    cardEl.className = 'coord-card card-glass';
+
+                    /* Always show placeholder, hide if real photo loads */
+                    var placeholder = '<div class="coord-placeholder">' + ini + '</div>';
+                    var imgTag = '';
+                    if (c.foto) {
+                        imgTag = '<img src="' + c.foto + '" class="coord-avatar" ' +
+                            'onload="this.nextElementSibling.style.display=\'none\'" ' +
+                            'onerror="this.style.display=\'none\'">';
+                    }
+
+                    cardEl.innerHTML =
+                        '<div style="position:relative;flex-shrink:0">' + imgTag + placeholder + '</div>' +
+                        '<div>' +
+                            '<p class="font-bold text-sm" style="color:var(--tinta)">' + escHtml(c.nombre || 'Coordinador') + '</p>' +
+                            (c.desde ? '<p class="text-xs" style="opacity:0.6;color:var(--tinta)">Desde ' + escHtml(c.desde) + '</p>' : '') +
+                            (c.bio ? '<p class="text-xs mt-1" style="opacity:0.5;color:var(--tinta)">' + escHtml(truncate(c.bio, 80)) + '</p>' : '') +
+                        '</div>';
+
+                    cardEl.addEventListener('click', function() {
+                        openModal(c.nombre || 'Coordinador', {
+                            texto: (c.desde ? 'Coordinador desde ' + c.desde + '\n\n' : '') + (c.bio || ''),
+                            fotos: c.foto ? [c.foto] : []
+                        });
+                    });
+
+                    modalCoordinators.appendChild(cardEl);
+                });
+            }
+
+            modal.scrollTop = 0;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function makeImgHtml(src, alt) {
+            return '<div class="d-img"><img src="'+src+'" alt="'+escHtml(alt)+'" loading="lazy" onclick="openLightbox(this.src)" onerror="this.parentElement.remove()"></div>';
+        }
+
+        /* ===== LIGHTBOX ===== */
+        window.openLightbox = function(src) {
+            var lb = $('lightbox');
+            var img = $('lbImg');
+            if (!lb || !img) return;
+            img.src = src;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        window.closeLightbox = function() {
+            var lb = $('lightbox');
+            if (lb) lb.classList.remove('active');
+            /* Restore scroll only if modal is not open */
+            var modal = $('modal');
+            if (!modal || !modal.classList.contains('open')) {
+                document.body.style.overflow = '';
+            }
+        };
+
+        function closeModal() {
+            var modal = $('modal');
+            if (modal) {
+                modal.classList.remove('open');
+                setTimeout(function() {
+                    document.body.style.overflow = '';
+                }, 400);
+            }
+            if (state.lastFocus) {
+                try { state.lastFocus.focus(); } catch(e) {}
+            }
+        }
+
+        /* ===== RENDERIZADORES ===== */
+        function renderSchedule() {
+            var days = [
+                ['Domingo', ['08:00', '10:00', '18:30']],
+                ['Lunes', ['18:30']],
+                ['Martes', ['18:30']],
+                ['Miércoles', []],
+                ['Jueves', ['18:30']],
+                ['Viernes', ['18:30']],
+                ['Sábado', ['18:30']]
+            ];
+            var now = new Date();
+            var today = now.getDay();
+            var currentTime = now.getHours() * 60 + now.getMinutes();
+            var grid = $('scheduleGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            /* Find next mass */
+            var nextMassDay = -1, nextMassTime = -1;
+            for (var d = 0; d < 7; d++) {
+                var checkDay = (today + d) % 7;
+                var times = days[checkDay][1];
+                for (var t = 0; t < times.length; t++) {
+                    var parts = times[t].split(':');
+                    var mins = parseInt(parts[0]) * 60 + parseInt(parts[1]);
+                    if (d === 0 && mins <= currentTime) continue;
+                    nextMassDay = checkDay;
+                    nextMassTime = times[t];
+                    break;
+                }
+                if (nextMassDay !== -1) break;
+            }
+
+            days.forEach(function(pair, i) {
+                var day = pair[0], times = pair[1];
+                var hourDisplay = times.length ? times.map(function(t) {
+                    var p = t.split(':');
+                    var h = parseInt(p[0]);
+                    var m = p[1];
+                    var ampm = h >= 12 ? 'PM' : 'AM';
+                    if (h > 12) h -= 12;
+                    if (h === 0) h = 12;
+                    return h + ':' + m + ' ' + ampm;
+                }).join(' · ') : 'No hay misa';
+
+                var isToday = i === today;
+                var isNextMass = (i === nextMassDay);
+                var row = document.createElement('div');
+                row.className = 'schedule-row liquid-glass rounded-2xl px-4 sm:px-5 py-3 sm:py-4 flex items-center justify-between gap-2 sm:gap-4 ' + (isToday ? 'today-row' : '') + (isNextMass && !isToday ? ' next-mass' : '');
+                row.innerHTML =
+                    '<span class="cinzel font-bold text-xs sm:text-sm shrink-0">' + day + '</span>' +
+                    '<span class="schedule-hours text-xs sm:text-sm opacity-75 text-right">' + hourDisplay + '</span>' +
+                    (isToday ? '<span class="today-badge shrink-0 rounded-full px-2 sm:px-3 py-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest" style="background:var(--oro);color:var(--sacro)">Hoy</span>' : '');
+                grid.appendChild(row);
+            });
+        }
+
+        function renderNews() {
+            var grid = $('newsGrid');
+            var empty = $('newsEmpty');
+            if (!grid) return;
+            grid.innerHTML = '';
+            if (!DATA.noticias || DATA.noticias.length === 0) {
+                if (empty) empty.classList.remove('hidden');
+                return;
+            }
+            if (empty) empty.classList.add('hidden');
+            DATA.noticias.forEach(function(n) {
+                grid.appendChild(makeCard(n.t || n.titulo || 'Noticia', n.f || n.fecha || '', n));
+            });
+        }
+
+        function renderHistory() {
+            var hGrid = $('historyGrid');
+            var pGrid = $('priestsGrid');
+            if (hGrid) {
+                hGrid.innerHTML = '';
+                hGrid.appendChild(makeCard('Crónica Sagrada', 'Orígenes, memoria y camino comunitario.', DATA.historia_parroquia));
+                hGrid.appendChild(makeCard('Tradiciones', 'Devociones y costumbres que acompañan la fe.', DATA.tradiciones));
+            }
+            if (pGrid) {
+                pGrid.innerHTML = '';
+                Object.entries(DATA.parrocos || {}).forEach(function(entry) {
+                    var name = entry[0], info = entry[1];
+                    var fotos = getImages(info);
+                    pGrid.appendChild(makeCard(name, truncate(getContent(info), 100), info, {
+                        logo: fotos[0] || null
+                    }));
+                });
+            }
+        }
+
+        function renderGroups() {
+            var grid = $('groupsGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            Object.entries(DATA.descripciones_grupos || {}).forEach(function(entry) {
+                var name = entry[0], info = entry[1];
+                grid.appendChild(makeCard(name, truncate(getContent(info), 140), info, {
+                    borderColor: info.color || '#d4af37',
+                    logo: info.logo || null
+                }));
+            });
+        }
+
+        function renderSacramentos() {
+            var grid = $('sacramentosGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            Object.entries(SACRAMENTOS).forEach(function(entry) {
+                var name = entry[0], info = entry[1];
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'reveal focus-ring liquid-glass card-glass w-full rounded-2xl sm:rounded-3xl p-4 sm:p-5 md:p-6 text-left';
+                btn.style.borderLeft = '6px solid ' + info.color;
+                btn.addEventListener('click', function() { openSacramentoModal(name, info); });
+
+                btn.innerHTML =
+                    '<div class="flex items-center gap-3 mb-3">' +
+                        '<div class="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl transition-transform" style="background:linear-gradient(135deg,' + info.color + ',' + info.color2 + ')">' +
+                            '<i class="fas ' + info.icono + ' text-white text-sm sm:text-base"></i>' +
+                        '</div>' +
+                        '<div class="min-w-0">' +
+                            '<h3 class="cinzel text-sm sm:text-base md:text-lg font-bold">' + escHtml(name) + '</h3>' +
+                            '<p class="text-xs sm:text-sm opacity-60 mt-0.5">Toca para ver requisitos</p>' +
+                        '</div>' +
+                    '</div>' +
+                    '<p class="text-xs sm:text-sm leading-6 opacity-70">' + escHtml(info.resumen) + '</p>';
+                grid.appendChild(btn);
+            });
+        }
+
+        function openSacramentoModal(name, info) {
+            var modal = $('modal');
+            var modalTitle = $('modalTitle');
+            var modalText = $('modalText');
+            var modalCoordinators = $('modalCoordinators');
+
+            if (!modal || !modalTitle || !modalText) return;
+
+            state.lastFocus = document.activeElement;
+            modalTitle.textContent = name;
+
+            if (modalText) {
+                modalText.innerHTML =
+                    '<div class="prose-content">' +
+                        '<p class="whitespace-pre-wrap mb-6 sm:mb-8">' + escHtml(info.descripcion) + '</p>' +
+
+                        '<div class="liquid-glass rounded-2xl p-4 sm:p-5 mb-4">' +
+                            '<h4 class="cinzel font-bold text-sm sm:text-base mb-3 flex items-center gap-2" style="color:var(--oro)">' +
+                                '<i class="fas fa-clipboard-list"></i> Requisitos' +
+                            '</h4>' +
+                            '<ul class="space-y-2 text-xs sm:text-sm">' +
+                                info.requisitos.map(function(req) {
+                                    return '<li class="flex items-start gap-2"><i class="fas fa-check text-[10px] mt-1.5" style="color:' + info.color + '"></i><span>' + escHtml(req) + '</span></li>';
+                                }).join('') +
+                            '</ul>' +
+                        '</div>' +
+
+                        '<div class="liquid-glass rounded-2xl p-4 sm:p-5 mb-4">' +
+                            '<h4 class="cinzel font-bold text-sm sm:text-base mb-3 flex items-center gap-2" style="color:var(--oro)">' +
+                                '<i class="fas fa-calendar-alt"></i> Horario' +
+                            '</h4>' +
+                            '<p class="text-xs sm:text-sm opacity-80">' + escHtml(info.horario) + '</p>' +
+                        '</div>' +
+
+                        '<div class="liquid-glass rounded-2xl p-4 sm:p-5" style="border-left:4px solid ' + info.color + '">' +
+                            '<h4 class="cinzel font-bold text-sm sm:text-base mb-2 flex items-center gap-2" style="color:var(--oro)">' +
+                                '<i class="fas fa-info-circle"></i> Nota importante' +
+                            '</h4>' +
+                            '<p class="text-xs sm:text-sm opacity-80">' + escHtml(info.nota) + '</p>' +
+                        '</div>' +
+                    '</div>';
+            }
+
+            if (modalCoordinators) modalCoordinators.innerHTML = '';
+
+            modal.scrollTop = 0;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function renderGallery() {
+            var grid = $('galleryGrid');
+            var empty = $('galleryEmpty');
+            if (!grid) return;
+            grid.innerHTML = '';
+            if (!DATA.fotos_galeria || DATA.fotos_galeria.length === 0) {
+                if (empty) empty.classList.remove('hidden');
+                return;
+            }
+            if (empty) empty.classList.add('hidden');
+            DATA.fotos_galeria.forEach(function(item) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'focus-ring liquid-glass card-glass w-full overflow-hidden rounded-2xl sm:rounded-3xl text-left';
+                btn.addEventListener('click', function() { openModal(item.pie || 'Galería', { texto: item.pie || '', url: item.url }); });
+                btn.innerHTML =
+                    '<img data-src="' + item.url + '" alt="' + escHtml(item.pie || '') + '" class="w-full object-cover" onerror="this.parentElement.remove()">' +
+                    '<p class="px-4 sm:px-5 py-3 text-xs sm:text-sm opacity-70">' + escHtml(item.pie || '') + '</p>';
+                grid.appendChild(btn);
+            });
+            initLazyLoad();
+        }
+
+        /* ===== LAZY LOAD IMAGES ===== */
+        function initLazyLoad() {
+            var images = $$('img[data-src]');
+            if (!images.length) return;
+
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var img = entry.target;
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            img.onload = function() { img.classList.add('loaded'); };
+                            observer.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '100px' });
+
+                images.forEach(function(img) { observer.observe(img); });
+            } else {
+                /* Fallback */
+                images.forEach(function(img) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    img.classList.add('loaded');
+                });
+            }
+        }
+
+        function syncLinks() {
+            var radioLink = $('radioLink');
+            var radioBtn = $('radioBtn');
+            if (radioLink) radioLink.href = DATA.link_radio || '#';
+            if (radioBtn) radioBtn.href = DATA.link_radio || '#';
+
+            var wa = (DATA.redes && DATA.redes.whatsapp) || '';
+            var ig = (DATA.redes && DATA.redes.instagram) || '';
+            var fb = (DATA.redes && DATA.redes.facebook) || '';
+
+            /* WhatsApp */
+            ['waFloat','waLink','waFoot'].forEach(function(id) {
+                var el = $(id);
+                if (!el) return;
+                if (wa && wa !== '#') { el.href = wa; el.classList.remove('social-hidden'); }
+                else { el.classList.add('social-hidden'); }
+            });
+            /* Instagram */
+            ['igFloat','igLink','igFoot'].forEach(function(id) {
+                var el = $(id);
+                if (!el) return;
+                if (ig && ig !== '#') { el.href = ig; el.classList.remove('social-hidden'); }
+                else { el.classList.add('social-hidden'); }
+            });
+            /* Facebook */
+            ['fbFloat','fbLink','fbFoot'].forEach(function(id) {
+                var el = $(id);
+                if (!el) return;
+                if (fb && fb !== '#') { el.href = fb; el.classList.remove('social-hidden'); }
+                else { el.classList.add('social-hidden'); }
+            });
+        }
+
+        /* ===== FORMULARIO DE CONTACTO ===== */
+        function handleEmail(e) {
+            e.preventDefault();
+            var name = ($('contactName') || {}).value || '';
+            var subject = ($('contactSubject') || {}).value || '';
+            var message = ($('contactMessage') || {}).value || '';
+            name = name.trim();
+            subject = subject.trim();
+            message = message.trim();
+            if (!name || !subject || !message) {
+                showToast('Por favor completa todos los campos');
+                return;
+            }
+            window.location.href = 'mailto:Parroquiasantabarbara12@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent('De: ' + name + '\n\n' + message);
+        }
+
+        /* ===== TEMA ===== */
+        function toggleTheme() {
+            var on = document.body.classList.toggle('dark-mode');
+            try { localStorage.setItem('dark-mode', on ? 'true' : 'false'); } catch(e) {}
+            var btn = $('themeToggle');
+            if (btn) btn.innerHTML = on ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        /* ===== TOAST ===== */
+        function showToast(msg) {
+            if (!msg) return;
+            var t = $('toast');
+            if (!t) return;
+            t.innerHTML = '<div class="flex items-center gap-3"><i class="fas fa-bell text-lg" style="color:var(--oro)"></i><span>' + escHtml(msg) + '</span></div>';
+            requestAnimationFrame(function() {
+                t.style.opacity = '1';
+                t.style.transform = 'translateY(0)';
+                t.style.pointerEvents = 'auto';
+            });
+            setTimeout(function() {
+                t.style.opacity = '0';
+                t.style.transform = 'translateY(-20px)';
+                t.style.pointerEvents = 'none';
+            }, 7000);
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        function initScrollTop() {
+            var btn = $('scrollTop');
+            if (!btn) return;
+            var ticking = false;
+
+            function update() {
+                btn.classList.toggle('visible', window.scrollY > 400);
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(update);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        /* ===== SWIPE NAVIGATION ===== */
+        function initSwipe() {
+            var startX = 0;
+            var startY = 0;
+            var minSwipe = 80;
+
+            document.addEventListener('touchstart', function(e) {
+                startX = e.changedTouches[0].screenX;
+                startY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', function(e) {
+                var diffX = e.changedTouches[0].screenX - startX;
+                var diffY = e.changedTouches[0].screenY - startY;
+
+                /* Only horizontal swipes (ignore vertical scroll) */
+                if (Math.abs(diffX) < minSwipe || Math.abs(diffY) > Math.abs(diffX)) return;
+
+                var modal = $('modal');
+                if (modal && modal.classList.contains('open')) return;
+
+                var lb = $('lightbox');
+                if (lb && lb.classList.contains('active')) return;
+
+                var currentIdx = SECTIONS.indexOf(state.activeSection);
+                if (currentIdx === -1) return;
+
+                if (diffX > 0 && currentIdx > 0) {
+                    showSection(SECTIONS[currentIdx - 1]);
+                } else if (diffX < 0 && currentIdx < SECTIONS.length - 1) {
+                    showSection(SECTIONS[currentIdx + 1]);
+                }
+            }, { passive: true });
+        }
+
+        /* ===== SAVE/RESTORE SECTION ===== */
+        function saveSection(id) {
+            try { sessionStorage.setItem('lastSection', id); } catch(e) {}
+        }
+
+        function getLastSection() {
+            try {
+                /* Only restore if user has navigated before in this session */
+                var visited = sessionStorage.getItem('hasVisited');
+                if (!visited) {
+                    sessionStorage.setItem('hasVisited', 'true');
+                    return null;
+                }
+                return sessionStorage.getItem('lastSection');
+            } catch(e) { return null; }
+        }
+
+        /* ===== HIDE LOADER ===== */
+        function hideLoader() {
+            var loader = $('pageLoader');
+            if (loader) {
+                setTimeout(function() {
+                    loader.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        /* ===== INIT ===== */
+        function init() {
+            try {
+                if (localStorage.getItem('dark-mode') === 'true') {
+                    document.body.classList.add('dark-mode');
+                    var toggle = $('themeToggle');
+                    if (toggle) toggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            } catch(e) {}
+
+            /* Botones de navegación */
+            $$('[data-section]').forEach(function(b) {
+                b.addEventListener('click', function() { showSection(b.dataset.section); });
+            });
+
+            /* Navegación móvil */
+            var mobileNav = $('mobileNav');
+            if (mobileNav) mobileNav.addEventListener('change', function(e) { showSection(e.target.value); });
+
+            /* Modal */
+            var modalClose = $('modalClose');
+            var modal = $('modal');
+            if (modalClose) modalClose.addEventListener('click', closeModal);
+
+            /* Lightbox */
+            var lb = $('lightbox');
+            if (lb) {
+                lb.addEventListener('click', function(e) {
+                    if (e.target === lb || e.target === $('lbImg')) closeLightbox();
+                });
+            }
+
+            /* Single Escape handler: lightbox first, then modal */
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    var lbox = $('lightbox');
+                    if (lbox && lbox.classList.contains('active')) {
+                        closeLightbox();
+                        return;
+                    }
+                    var m = $('modal');
+                    if (m && m.classList.contains('open')) closeModal();
+                }
+            });
+
+            /* Formulario de correo electrónico */
+            var form = $('emailForm');
+            if (form) form.addEventListener('submit', handleEmail);
+
+            /* Tema */
+            var themeBtn = $('themeToggle');
+            if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+            /* Render */
+            renderSchedule();
+            renderNews();
+            renderHistory();
+            renderGroups();
+            renderSacramentos();
+            renderGallery();
+            syncLinks();
+
+            /* Restore last section or default */
+            var lastSection = getLastSection();
+            if (lastSection && SECTIONS.indexOf(lastSection) !== -1) {
+                showSection(lastSection, false);
+            } else {
+                showSection('inicio', false);
+            }
+
+            /* Initialize enhancements */
+            initScrollTop();
+            initSwipe();
+
+            /* Hide loader and show toast */
+            hideLoader();
+            showToast(DATA.anuncio_popup);
+        }
+
+                /* ===== ADMIN PANEL ===== */
+        var ADMIN_PASSWORD = 'santa2026';
+        var adminBuffer = null;
+        var adminEditing = false;
+        var adminActiveTab = 0;
+
+        function showPasswordPrompt() {
+            var login = $('adminLogin');
+            var pwd = $('adminPwd');
+            var err = $('adminPwdError');
+            if (!login) return;
+            login.style.display = 'flex';
+            if (pwd) { pwd.value = ''; pwd.focus(); }
+            if (err) err.style.display = 'none';
+        }
+
+        function hidePasswordPrompt() {
+            var login = $('adminLogin');
+            if (login) login.style.display = 'none';
+        }
+
+        function checkPassword() {
+            var pwd = $('adminPwd');
+            var err = $('adminPwdError');
+            if (!pwd) return;
+            if (pwd.value === ADMIN_PASSWORD) {
+                hidePasswordPrompt();
+                openAdmin();
+            } else {
+                if (err) err.style.display = 'block';
+                pwd.value = '';
+                pwd.focus();
+            }
+        }
+
+        function openAdmin() {
+            if (adminEditing) return;
+            adminEditing = true;
+            adminBuffer = JSON.parse(JSON.stringify(SACRAMENTOS));
+            adminActiveTab = 0;
+            renderAdminTabs();
+            renderAdminEditor();
+            var panel = $('adminPanel');
+            if (panel) panel.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAdmin() {
+            adminEditing = false;
+            adminBuffer = null;
+            var panel = $('adminPanel');
+            if (panel) panel.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function renderAdminTabs() {
+            var tabs = $('adminTabs');
+            if (!tabs || !adminBuffer) return;
+            tabs.innerHTML = '';
+            var keys = Object.keys(adminBuffer);
+            keys.forEach(function(name, i) {
+                var btn = document.createElement('button');
+                btn.className = 'adm-tab' + (i === adminActiveTab ? ' active' : '');
+                btn.textContent = name;
+                btn.onclick = function() {
+                    syncCurrentEditor();
+                    adminActiveTab = i;
+                    renderAdminTabs();
+                    renderAdminEditor();
+                };
+                tabs.appendChild(btn);
+            });
+        }
+
+        function renderAdminEditor() {
+            var editor = $('adminEditor');
+            if (!editor || !adminBuffer) return;
+            editor.innerHTML = '';
+            var keys = Object.keys(adminBuffer);
+            if (keys.length === 0) {
+                editor.innerHTML = '<p style="text-align:center;opacity:0.5;padding:40px 0;color:var(--tinta)">No hay sacramentos. Toca "+ Nuevo" para agregar uno.</p>';
+                return;
+            }
+            if (adminActiveTab >= keys.length) adminActiveTab = keys.length - 1;
+            var name = keys[adminActiveTab];
+            var info = adminBuffer[name];
+
+            var fields = [
+                { id: 'adm_name', label: 'Nombre', value: name, type: 'text' },
+                { id: 'adm_icon', label: 'Ícono FontAwesome', value: info.icono || '', type: 'text', hint: 'Ej: fa-water, fa-fire, fa-heart' },
+                { id: 'adm_color', label: 'Color principal', value: info.color || '#d4af37', type: 'color' },
+                { id: 'adm_color2', label: 'Color secundario', value: info.color2 || '#d4af37', type: 'color' },
+                { id: 'adm_resumen', label: 'Resumen (texto corto en la tarjeta)', value: info.resumen || '', type: 'text' },
+                { id: 'adm_desc', label: 'Descripción completa', value: info.descripcion || '', type: 'textarea', rows: 6 },
+                { id: 'adm_reqs', label: 'Requisitos (uno por línea)', value: (info.requisitos || []).join('\n'), type: 'textarea', rows: 5 },
+                { id: 'adm_horario', label: 'Horario', value: info.horario || '', type: 'text' },
+                { id: 'adm_nota', label: 'Nota importante', value: info.nota || '', type: 'text' }
+            ];
+
+            fields.forEach(function(f) {
+                var wrap = document.createElement('div');
+                wrap.className = 'adm-field';
+
+                var label = document.createElement('label');
+                label.className = 'adm-label';
+                label.textContent = f.label;
+                wrap.appendChild(label);
+
+                if (f.type === 'color') {
+                    var row = document.createElement('div');
+                    row.className = 'adm-colors';
+                    var swatch = document.createElement('input');
+                    swatch.type = 'color';
+                    swatch.className = 'adm-swatch';
+                    swatch.value = f.value;
+                    swatch.id = f.id + '_swatch';
+                    var hex = document.createElement('input');
+                    hex.type = 'text';
+                    hex.className = 'adm-input';
+                    hex.value = f.value;
+                    hex.id = f.id;
+                    hex.style.flex = '1';
+                    swatch.oninput = function() { hex.value = swatch.value; };
+                    hex.oninput = function() { swatch.value = hex.value; };
+                    row.appendChild(swatch);
+                    row.appendChild(hex);
+                    wrap.appendChild(row);
+                } else if (f.type === 'textarea') {
+                    var ta = document.createElement('textarea');
+                    ta.className = 'adm-input';
+                    ta.id = f.id;
+                    ta.rows = f.rows || 4;
+                    ta.value = f.value;
+                    wrap.appendChild(ta);
+                } else {
+                    var inp = document.createElement('input');
+                    inp.type = 'text';
+                    inp.className = 'adm-input';
+                    inp.id = f.id;
+                    inp.value = f.value;
+                    if (f.hint) inp.placeholder = f.hint;
+                    wrap.appendChild(inp);
+                }
+
+                editor.appendChild(wrap);
+            });
+
+            /* Delete button */
+            var del = document.createElement('button');
+            del.className = 'adm-del';
+            del.innerHTML = '<i class="fas fa-trash" style="margin-right:6px"></i>Eliminar este sacramento';
+            del.onclick = function() {
+                if (!confirm('¿Eliminar "' + name + '"?')) return;
+                delete adminBuffer[name];
+                adminActiveTab = 0;
+                renderAdminTabs();
+                renderAdminEditor();
+            };
+            editor.appendChild(del);
+        }
+
+        function syncCurrentEditor() {
+            if (!adminBuffer) return;
+            var keys = Object.keys(adminBuffer);
+            if (adminActiveTab >= keys.length) return;
+            var oldName = keys[adminActiveTab];
+
+            var newName = ($('adm_name') || {}).value || oldName;
+            newName = newName.trim();
+
+            var updated = {
+                icono: ($('adm_icon') || {}).value || 'fa-star',
+                color: ($('adm_color') || {}).value || '#d4af37',
+                color2: ($('adm_color2') || {}).value || '#d4af37',
+                resumen: ($('adm_resumen') || {}).value || '',
+                descripcion: ($('adm_desc') || {}).value || '',
+                requisitos: (($('adm_reqs') || {}).value || '').split('\n').map(function(s) { return s.trim(); }).filter(Boolean),
+                horario: ($('adm_horario') || {}).value || '',
+                nota: ($('adm_nota') || {}).value || ''
+            };
+
+            if (newName !== oldName) {
+                delete adminBuffer[oldName];
+            }
+            adminBuffer[newName] = updated;
+        }
+
+        function applyAdmin() {
+            if (!adminBuffer) return;
+            syncCurrentEditor();
+            /* Clear and replace SACRAMENTOS */
+            Object.keys(SACRAMENTOS).forEach(function(k) { delete SACRAMENTOS[k]; });
+            Object.assign(SACRAMENTOS, adminBuffer);
+            renderSacramentos();
+            showToast('Cambios aplicados ✓');
+        }
+
+        function downloadAdmin() {
+            if (!adminBuffer) return;
+            syncCurrentEditor();
+            var json = JSON.stringify(adminBuffer, null, 4);
+            var blob = new Blob([json], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'sacramentos.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Archivo descargado ✓');
+        }
+
+        function addNewSacramento() {
+            if (!adminBuffer) return;
+            syncCurrentEditor();
+            var i = 1;
+            while (adminBuffer['Nuevo Sacramento ' + i]) i++;
+            adminBuffer['Nuevo Sacramento ' + i] = {
+                icono: 'fa-star',
+                color: '#d4af37',
+                color2: '#b8941f',
+                resumen: '',
+                descripcion: '',
+                requisitos: [],
+                horario: '',
+                nota: ''
+            };
+            adminActiveTab = Object.keys(adminBuffer).length - 1;
+            renderAdminTabs();
+            renderAdminEditor();
+        }
+
+        /* Init admin */
+        function initAdmin() {
+            var fab = $('adminFab');
+            if (fab) {
+                fab.style.display = 'flex';
+                fab.addEventListener('click', showPasswordPrompt);
+                fab.addEventListener('mouseenter', function() { fab.style.opacity = '1'; fab.style.transform = 'scale(1.1)'; });
+                fab.addEventListener('mouseleave', function() { fab.style.opacity = '0.4'; fab.style.transform = 'scale(1)'; });
+            }
+
+            $('adminPwdOk') && $('adminPwdOk').addEventListener('click', checkPassword);
+            $('adminPwdCancel') && $('adminPwdCancel').addEventListener('click', hidePasswordPrompt);
+            $('adminPwd') && $('adminPwd').addEventListener('keydown', function(e) { if (e.key === 'Enter') checkPassword(); });
+            $('adminClose') && $('adminClose').addEventListener('click', closeAdmin);
+            $('adminApply') && $('adminApply').addEventListener('click', applyAdmin);
+            $('adminDownload') && $('adminDownload').addEventListener('click', downloadAdmin);
+            $('adminAdd') && $('adminAdd').addEventListener('click', addNewSacramento);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (adminEditing) closeAdmin();
+                    else hidePasswordPrompt();
+                }
+            });
+        }
+
+        /* Esperar a que el DOM esté listo */
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() { init(); initAdmin(); });
+        } else {
+            init();
+            initAdmin();
+        }
+    })();
+    </script>
+</body>
+</html>
